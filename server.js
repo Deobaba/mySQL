@@ -1,31 +1,15 @@
   require('dotenv').config
- const mysql = require('mysql')
+  const {connectDB} = require('./config/db')
  const express = require('express')
  const app = express()
 
- const db = mysql.createConnection({
-   host:'localhost',
-   user: 'Deobaba',
-   password:'Baba1996',
- })
+ const database = require('./route/database')
 
- db.connect((err)=>{
-   if(err){
-      throw err
-   }
-   console.log('connected to database')
- })
+connectDB()
 
- app.use(express.json())
+app.use(express.json())
 
- app.get('/createdb',(req,res)=>{
-   let sql = 'CREATE DATABASE PIZZAPP'
-   db.query(sql,(err,result)=>{
-      if(err){throw err}
-      console.log(result)
-      res.send('Database created')
-   })
- })
+app.use('/',database)
 
  const PORT = process.env.PORT || 5000
   
