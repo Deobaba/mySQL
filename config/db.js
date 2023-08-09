@@ -1,4 +1,6 @@
+require('dotenv').config({path:'./config.env'})
 const mysql = require('mysql')
+
 
 const db = mysql.createConnection({
     host:'localhost',

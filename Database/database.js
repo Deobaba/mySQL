@@ -33,8 +33,9 @@ exports.deleteTable = async (req,res)=>{
 }
 
 exports.getTable = async (req,res) =>{
-  let sql ='DROP TABLE orderlist '
-  await queryCommand(sql,'TABLES',res)
+  // let sql ='DROP TABLE orderlist '
+  // await queryCommand(sql,'TABLES',res)
+  res.send('it finally here')
 }
 
 exports.addUser = async(req,res)=>{

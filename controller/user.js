@@ -17,9 +17,10 @@ exports.createUser = async (req,res)=>{
    let createdAtDate = `${yyyy}-${mm}-${dd}`;
    let updatedAtDate = `${yyyy}-${mm}-${dd}`;
 
-   const {password,usertyp,create_at} = req.body
+   const {password,usertype,create_at} = req.body
 
-   let sql =`INSERT INTO user(password,usertype,create_at) VALUES(``)`
+   let sql =`INSERT INTO user(password,usertype,create_at) VALUES('${password}','${usertype}','${create_at}')`
+   queryCommand(sql,'user created')
 }
 
 exports.getUser = async (req,res)=>{
