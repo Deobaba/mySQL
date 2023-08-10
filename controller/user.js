@@ -1,6 +1,6 @@
 const {db} = require('../config/db')
 
-let queryCommand = (que,message,res,set= null) =>{
+let queryCommand = (que,res,set= null) =>{
    if (set === null){
       db.query(que,(err,result)=>{
          if(err){throw err}
@@ -14,7 +14,9 @@ let queryCommand = (que,message,res,set= null) =>{
       db.query(que,set,(err,result)=>{
       if(err){throw err}
       console.log(result)
-      res.send(message)
+      res.json({
+         data:result
+      })
   })}
     
 }
@@ -32,22 +34,22 @@ exports.createUser = async (req,res)=>{
 
    let sql =`INSERT INTO user SET?`
    let post = {password,usertype,create_at:createdAtDate,username}
-   queryCommand(sql,'user created',res,post)
+   queryCommand(sql,res,post)
 }
 
 exports.getUser = async (req,res)=>{
    let sql =`SELECT * FROM user WHERE userid = ${req.params.id}`
-   queryCommand(sql,'gotten',res)
+   queryCommand(sql,res)
 } 
 
 exports.editUser = async (req,res)=>{
-   let sql =''
+   const {username} = req.body
+   let sql =`UPDATE user SET username = '${username}' WHERE userid = ${req.params.id}`
+   queryCommand(sql,res)
 }
 
 exports.deleteUser = async (req,res)=>{
-   let sql =''
+   let sql =`DELETE FROM user WHERE userid =${req.params.id}`
+   queryCommand(sql,res)
 }
 
-exports.updateUser = async (req,res)=>{
-    let sql =''
-}
