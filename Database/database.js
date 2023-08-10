@@ -23,7 +23,7 @@ exports.createTable = async(req,res)=>{
 }
 
 exports.editTable = async (req,res)=>{
-   let sql = 'ALTER TABLE item  ADD COLUMN state ENUM("small","medium","large") '
+   let sql = 'ALTER TABLE user  ADD COLUMN username VARCHAR(225) NOT NULL UNIQUE '
     await queryCommand(sql,'table edited',res)
 }
 

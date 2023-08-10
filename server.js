@@ -3,12 +3,17 @@
  const express = require('express')
  const app = express()
 
+ app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
  const database = require('./route/database')
  const user = require('./route/user')
 
 connectDB()
 
-app.use(express.json())
+// app.use(express.json())
+// // Body parser
+// app.use(express.json());
 
 app.use('/',database)
 app.use('/user',user)
